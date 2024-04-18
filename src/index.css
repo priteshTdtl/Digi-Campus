@@ -1,0 +1,133 @@
+/* Import Popins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* Use Popins font for body and headings */
+body, html, .App, #root, .auth-wrapper {
+  font-family: 'Poppins', sans-serif;
+  width: 100%;
+  height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, label, span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #1C8EF9 !important;
+  min-height: 100vh;
+  display: flex;
+  font-weight: 400;
+  font-family: 'Poppins';
+}
+
+.navbar-light {
+  background-color: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+}
+
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+}
+
+
+.auth-wrapper .form-control:focus {
+  border-color: #167bff;
+  box-shadow: none;
+}
+
+.auth-wrapper h3 {
+  text-align: center;
+  margin: 0;
+  line-height: 2;
+  padding-bottom: 3%;
+}
+
+.custom-control-label {
+  font-weight: 400;
+}
+
+.forgot-password,
+.forgot-password a {
+  text-align: right;
+  font-size: 13px;
+  padding-top: 10px;
+  color: #7f7d7d;
+  margin: 0;
+}
+
+.forgot-password a {
+  color: #167bff;
+}
+
+.auth-inner .mb-3 {
+  margin-bottom: 5%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.admin-login-inner {
+  width: 30em;
+  height: 30em; /* Adjusted height for admin login page */
+  margin: auto;
+  background: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding: 40px 55px 45px 55px;
+  border-radius: 15px;
+  transition: all .3s;
+}
+
+.university-signup-inner {
+  width: 35em;
+  height: 45em; /* Adjusted height for university signup page */
+  margin: auto;
+  background: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding: 40px 55px 45px 55px;
+  border-radius: 15px;
+  transition: all .3s;
+}
+
+.college-signup-inner {
+  width: 35em;
+  height: 40em; /* Adjusted height for college signup page */
+  margin: auto;
+  background: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding: 40px 55px 45px 55px;
+  border-radius: 15px;
+  transition: all .3s;
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-input input {
+  padding-right: 2.5em; /* Space for the button */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 0;
+  top: 67%; /* Align vertically */
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5em;
+}
+
+.toggle-password:focus {
+  outline: none;
+}
