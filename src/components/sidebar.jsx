@@ -27,7 +27,7 @@ export default function Sidebar() {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem("token");
-        window.location.href = "/login";
+        window.location.href = "/adminLogin";
       }
     });
   };
