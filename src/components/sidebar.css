@@ -22,6 +22,8 @@ a:focus {
   color: inherit;
   text-decoration: none;
   transition: all 0.3s;
+  border-radius: 20px;
+  margin: 10px;
 }
 
 .navbar {
@@ -59,10 +61,11 @@ a:focus {
 #sidebar {
   min-width: 250px;
   max-width: 250px;
-  background: #fff;
+  background: linear-gradient(120deg, #ffffff, rgb(217, 31, 227));
   color: #000000;
   transition: all 0.3s;
   height: 100vh;
+  padding-left: 20px;
 }
 
 #sidebar.active {
@@ -70,8 +73,8 @@ a:focus {
 }
 
 #sidebar .sidebar-header {
-  padding: 20px;
-  background: #ffff;
+  padding-top: 20px;
+  background: linear-gradient(deg, #ffffff, #1fc2e3);
 }
 
 #sidebar ul.components {
@@ -79,10 +82,10 @@ a:focus {
   border-bottom: 1px solid #47748b;
 }
 
-#sidebar ul p {
+/* #sidebar ul p {
   color: #00000;
   padding: 10px;
-}
+} */
 
 #sidebar ul li a {
   padding: 10px;
@@ -140,6 +143,9 @@ a.article,
 a.article:hover {
   background: #6d7fcc !important;
   color: #000000 !important;
+}
+#sidebar ul li {
+  font-size: 15px;
 }
 
 /* ---------------------------------------------------
