@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import "../index.css";
-
-
 
 export default class AdminLogin extends Component {
   constructor(props) {

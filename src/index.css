@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, h6, label, span {
 }
 
 body {
-  background: #1C8EF9 !important;
+  background: linear-gradient(90deg,#3e46aa, #e620cf) !important;
   min-height: 100vh;
   display: flex;
   font-weight: 400;
