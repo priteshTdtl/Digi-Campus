@@ -34,7 +34,7 @@ const App = () => {
           <Route path="/" 
           element={
               <>
-                <Navigation />
+                {/* <Navigation /> */}
                 <LandingPage landingPageData={landingPageData} />
               </>
             }
