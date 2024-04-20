@@ -1,0 +1,16 @@
+    .dash-root{
+        background: linear-gradient(90deg, #3e46aa, #e620cf);
+        height: 100vh;
+    }
+.card-form{
+    width: 35em;
+    background-color: azure;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);}
+.headingregistration{
+    color:#3e46aa;
+}
+.btn-submit{
+    color: white;
+    border: none;
+    background: linear-gradient(90deg, #3e46aa, #e620cf);
+}

@@ -94,11 +94,11 @@ const UniversityLogin = () => {
               Submit
             </button>
           </div>
-          <p className="forgot-password mb-3">
+          <p className="d-flex justify-content-between mb-3">
             <Link to="/adminLogin" className="back-to-login">
               <MdKeyboardBackspace fontSize={25} />
             </Link>{" "}
-            <a href="#">Forgot password?</a>
+            <a href="#" className="links">Forgot password?</a>
           </p>
         </form>
       </div>
