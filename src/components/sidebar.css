@@ -61,11 +61,16 @@ a:focus {
 #sidebar {
   min-width: 250px;
   max-width: 250px;
-  background: linear-gradient(120deg, #ffffff, rgb(217, 31, 227));
+  background: linear-gradient(120deg, #807efc, rgb(217, 31, 227));
   color: #000000;
   transition: all 0.3s;
   height: 100vh;
   padding-left: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+
 }
 
 #sidebar.active {
@@ -91,6 +96,8 @@ a:focus {
   padding: 10px;
   font-size: 1.1em;
   display: block;
+  text-decoration: none;
+  color: white;
 }
 
 #sidebar ul li a:hover {
@@ -174,3 +181,6 @@ a.article:hover {
     display: none;
   }
 }
+
+
+

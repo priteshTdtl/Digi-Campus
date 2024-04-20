@@ -1,0 +1,117 @@
+.borrower{
+    border: none;
+    
+    color: white;
+}
+
+.close{
+    cursor: pointer;
+    
+}
+
+.popup2-content {
+
+    margin: 15% auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    background: rgb(255, 255, 255);
+    width: 35%;
+    padding: 5px;
+    box-shadow: 3px 1px 0px 800px rgba(0, 0, 0, 0.75);
+    height: 40%;
+    
+    
+}
+
+
+.dlt-btn{
+   
+    border: none;
+    color: white;
+}
+
+.eye-icon {
+    background-color: transparent;
+    border: none;
+    color: rgb(27, 27, 255);
+}
+
+.add-book-form {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+ 
+  .form-control {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  .addbook{
+    border: none;
+    color: white;
+  }
+
+  
+
+ .book-img{
+    height: 15vh;
+    width: 12rem;
+ }
+
+ table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Style table header */
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Style table rows */
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Style table data cells */
+  td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Hover effect on rows */
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  .lib-table{
+    overflow-x: scroll;
+  }
+
+@media (max-width:768px)
+{
+    .popup2-content {
+
+        margin: 15% auto;
+        border: 1px solid black;
+        border-radius: 10px;
+        background: rgb(255, 255, 255);
+        width: 40%;
+        padding: 5px;
+        
+        box-shadow: 3px 1px 0px 800px rgba(0, 0, 0, 0.75);
+        height: 20%;
+        overflow: scroll;
+    }
+    
+}
+  

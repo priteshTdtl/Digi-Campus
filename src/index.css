@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5, h6, label, span {
 }
 
 body {
-  background: #1C8EF9 !important;
+  /* background: #1C8EF9 !important; */
   min-height: 100vh;
   display: flex;
   font-weight: 400;
@@ -55,21 +55,16 @@ body {
   font-weight: 400;
 }
 
-.forgot-password,
-.forgot-password a {
-     /* text-align: right; */
+/* .forgot-password, */
+/* .forgot-password a {
      font-size: 13px;
-     /* padding-top: 10px; */
      color: #7f7d7d;
      margin: 0;
      display: flex;
      align-items: center;
      justify-content: space-between;
-}
+} */
 
-.forgot-password a {
-  color: #167bff;
-}
 
 .auth-inner .mb-3 {
   margin-bottom: 5%;
@@ -80,8 +75,8 @@ body {
 }
 
 .admin-login-inner {
-  width: 30em;
-  height: 30em; /* Adjusted height for admin login page */
+  width: 40em;
+  height: 40em; /* Adjusted height for admin login page */
   margin: auto;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
@@ -92,7 +87,7 @@ body {
 
 .university-signup-inner {
   width: 35em;
-  height: 45em; /* Adjusted height for university signup page */
+  height: 60em; /* Adjusted height for university signup page */
   margin: auto;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
@@ -103,7 +98,7 @@ body {
 
 .college-signup-inner {
   width: 35em;
-  height: 40em; /* Adjusted height for college signup page */
+  height: 52em; /* Adjusted height for college signup page */
   margin: auto;
   background: #ffffff;
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
@@ -133,4 +128,14 @@ body {
 
 .toggle-password:focus {
   outline: none;
+}
+
+.links {
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+}
+
+.links:hover {
+  color: orange;
 }
