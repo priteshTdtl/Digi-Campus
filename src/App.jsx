@@ -13,6 +13,7 @@ import CollegeSignup from "./components/collegeSignup";
 import UniversityLogin from "./components/universityLogin";
 import CollegeLogin from "./components/collegeLogin";
 import Sidebar from "./components/sidebar";
+import SamplePage from "./components/samplePage";
 
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
@@ -44,6 +45,7 @@ const App = () => {
           <Route path="/collegeSignup" element={<CollegeSignup />} />
           <Route path="/collegeLogin" element={<CollegeLogin />} />
           <Route path="/Home" element={<Sidebar />} />
+          <Route path="/Sample" element={<SamplePage />} />
           
         </Routes>  
       </div>
