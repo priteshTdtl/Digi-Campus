@@ -25,6 +25,8 @@ import StudentAttendance from "../src/pages/StudentAttendance";
 import Students from "../src/pages/Students";
 import Notice from "../src/pages/Notice"
 import EventForm from "../src/pages/Eventform";
+import UniSidebar from "./components/UniSidebar";
+import Fees from "./pages/Fees";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -66,6 +68,8 @@ const App = () => {
           <Route path="/collegeSignup" element={<CollegeSignup />} />
           <Route path="/collegeLogin" element={<CollegeLogin />} />
           <Route path="/Home" element={<Sidebar />} />
+          <Route path="/University-home" element={<UniSidebar />} />
+
           <Route path="/add-employee" element={<EmployeeAddForm />} />
           <Route path="/library" element={<LibraryTable universityId={universityId} collegeId={collegeId} />} />
           <Route path="/teachers" element={<TeacherTable />} />
@@ -79,6 +83,8 @@ const App = () => {
           <Route path="/students-attendance" element={<StudentAttendance />} />
           <Route path="/notice-board" element={<Notice />} />
           <Route path="/events" element={<EventForm />} />
+          <Route path="/fees-structure" element={<Fees />} />
+
 
 
         </Routes>

@@ -12,31 +12,27 @@ const LibraryTable = () => {
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [editable, setEditable] = useState(false); // State to manage table edit mode
-  const [collegeName, setCollegeName] = useState("");
+  const [editable, setEditable] = useState(false);
+  // const [collegeName, setCollegeName] = useState("");
+
+  const universityId = localStorage.getItem("universityId");
+  const collgeId = localStorage.getItem("collegeId");
 
   useEffect(() => {
-    fetchCollegeName();
+    // fetchCollegeName();
     fetchBooks();
   }, []);
 
-  const fetchCollegeName = async () => {
-    try {
-      const response = await fetch("api-url"); // Replace 'api-url' with your actual API endpoint
-      const data = await response.json();
-      setCollegeName(data.collegeName);
-    } catch (error) {
-      console.error("Error fetching college name:", error);
-    }
-  };
-
   const fetchBooks = async () => {
     try {
-      const response = await fetch("api-url"); // Replace 'api-url' with your actual API endpoint
-      const data = await response.json();
-      setBooks(data.books);
+      const response = await axios.post("http://54.68.156.170:8000/all_book/", {
+        college_id: collgeId,
+        university_id: universityId,
+      });
+      const data = response.data;
+      setBooks(data);
     } catch (error) {
-      console.error("Error fetching books:", error);
+      console.log(error);
     }
   };
 
@@ -53,8 +49,8 @@ const LibraryTable = () => {
   const handleAddBook = async (newBook) => {
     try {
       const response = await axios.post("http://54.68.156.170:8000/add_book/", {
-        university_id: "1",
-        college_id: "2",
+        university_id: universityId,
+        college_id: collgeId,
         book_name: newBook.bookName,
         author: newBook.authorName,
         isbn_no: newBook.ISBN,
@@ -69,6 +65,8 @@ const LibraryTable = () => {
         icon: "success",
         confirmButtonText: "OK",
       });
+
+      fetchBooks();
     } catch (error) {
       console.error("Error adding book:", error);
       Swal.fire({
@@ -80,22 +78,22 @@ const LibraryTable = () => {
     }
   };
 
-  const handleDeleteBook = async (bookId) => {
-    try {
-      await axios.delete(`http://54.68.156.170:8000/delete_book/${bookId}`);
-      const updatedBooks = books.filter((book) => book.bookId !== bookId);
-      setBooks(updatedBooks);
-      Swal.fire({
-        title: "Success!",
-        text: "Book deleted successfully!",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
-    } catch (error) {
-      console.error("Error deleting book:", error);
-      alert("Failed to delete book. Please try again later.");
-    }
-  };
+  // const handleDeleteBook = async (bookId) => {
+  //   try {
+  //     await axios.delete(`http://54.68.156.170:8000/delete_book/${bookId}`);
+  //     const updatedBooks = books.filter((book) => book.bookId !== bookId);
+  //     setBooks(updatedBooks);
+  //     Swal.fire({
+  //       title: "Success!",
+  //       text: "Book deleted successfully!",
+  //       icon: "success",
+  //       confirmButtonText: "OK",
+  //     });
+  //   } catch (error) {
+  //     console.error("Error deleting book:", error);
+  //     alert("Failed to delete book. Please try again later.");
+  //   }
+  // };
 
   return (
     <>
@@ -106,9 +104,9 @@ const LibraryTable = () => {
             <h2 className="d-flex justify-content-center mt-2">
               Welcome to the Library!
             </h2>
-            <h3 className="mt-4 d-flex justify-content-center">
+            {/* <h3 className="mt-4 d-flex justify-content-center">
               {collegeName}
-            </h3>
+            </h3> */}
 
             <div>
               <button
@@ -131,17 +129,17 @@ const LibraryTable = () => {
                     <th>Publish Year</th>
                     <th>Availability</th>
                     <th>Borrower</th>
-                    <th>Action</th>
+                    {/* <th>Action</th> */}
                   </tr>
                 </thead>
                 <tbody>
                   {books.map((book) => (
-                    <tr key={book.bookId}>
-                      <td>{book.bookName}</td>
-                      <td>{book.bookId}</td>
-                      <td>{book.authorName}</td>
-                      <td>{book.ISBN}</td>
-                      <td>{book.publishYear}</td>
+                    <tr key={book.books_id}>
+                      <td>{book.book_name}</td>
+                      <td>{book.books_id}</td>
+                      <td>{book.author}</td>
+                      <td>{book.isbn_no}</td>
+                      <td>{book.publish_year}</td>
                       <td>{book.availability}</td>
                       <td>
                         {book.borrower}
@@ -154,14 +152,14 @@ const LibraryTable = () => {
                           </button>
                         )}
                       </td>
-                      <td>
+                      {/* <td>
                         <button
-                          onClick={() => handleDeleteBook(book.bookId)}
+                          onClick={() => handleDeleteBook(book.books_id)}
                           className="dlt-btn bg-primary"
                         >
                           Delete
                         </button>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>

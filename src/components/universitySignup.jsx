@@ -50,6 +50,8 @@ const UniversitySignup = () => {
         title: "Success!",
         text: "University registered successfully!",
       });
+     
+
       setFormData({
         universityName: "",
         universityEmail: "",

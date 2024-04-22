@@ -260,16 +260,16 @@ export default function Students() {
             <div className="main p-3" style={{ margin: "20px" }}>
               <div className="row my-3">
               <h2>View Students Lists As per Classroom</h2>
-                <div className="col-4">
+                <div className="col-3">
                   <select
-                    className="form-select p-2"
+                    className="form-select p-3"
                     value={selectedClassroom}
                     onChange={(e) => setSelectedClassroom(e.target.value)}
                   >
-                    <option value="">Select Classroom</option>
-                    <option value="Classroom 1">Classroom 1</option>
-                    <option value="Classroom 2">Classroom 2</option>
-                    <option value="Classroom 3">Classroom 3</option>
+                    <option value="">Select Branch</option>
+                    <option value="B.Tech CSE">B.Tech CSE</option>
+                    <option value="MCA">MCA</option>
+                    <option value="B.E Mechanical">B.E Mechanical</option>
                     {/* Add more classrooms here */}
                   </select>
                 </div>
@@ -283,11 +283,11 @@ export default function Students() {
                     onChange={handleInputChange}
                   />
                 </div>
-                <div className="col-4">
+                {/* <div className="col-4">
                   <button className="btn btn-primary" onClick={addStudent}>
                     Add Student
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div style={{ height: 400, width: "100%" }}>

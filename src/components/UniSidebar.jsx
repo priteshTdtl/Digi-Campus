@@ -15,7 +15,7 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 
-export default function Sidebar() {
+export default function UniSidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleAccordion = () => {
@@ -49,35 +49,18 @@ export default function Sidebar() {
       <ul className="list-unstyled components">
         <h4>Welcome</h4>
         <li className="active">
-          <Link to="/Home">
+          <Link to="/University-home">
             <FaHome /> Home
           </Link>
-          {/* <ul className="collapse list-unstyled" id="homeSubmenu">
-            <li>
-              <Link to="#">
-                <FaHome /> Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                <FaHome /> Profile
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                <FaHome /> Settings
-              </Link>
-            </li>
-          </ul> */}
         </li>
         <li>
-          <Link to="/library">
-            <FaBook /> Library
+          <Link to="/collegeSignup">
+            <FaBook /> Register College
           </Link>
         </li>
         <li>
-          <Link to="/students">
-            <FaUserGraduate /> Students
+          <Link to="/#">
+            <FaUserGraduate /> Active Colleges
           </Link>
           {/* <ul className="collapse list-unstyled" id="studentsSubmenu">
             <li>
@@ -97,48 +80,40 @@ export default function Sidebar() {
             </li>
           </ul> */}
         </li>
-        <li onClick={toggleAccordion}>
+        {/* <li onClick={toggleAccordion}>
           <Link to="#">
             <FaClipboardList /> Exams
           </Link>
           {isOpen && (
             <ul className="nested">
               <li>
-                <Link to="/add-exam" style={{ color: "black" }}>
+                <Link to="/#" style={{ color: "black" }}>
                   Add exam
                 </Link>
-              </li>
+              </li> */}
               {/* <li>
               <Link to="/publish-distribute" style={{ color: 'black' }}>Publish</Link>
             </li> */}
-              <li>
-                <Link to="/view-results" style={{ color: "black" }}>
+              {/* <li>
+                <Link to="/#" style={{ color: "black" }}>
                   View result
                 </Link>
               </li>
             </ul>
           )}
-        </li>
-        <li>
-          <Link to="/fees-structure">
-            <FaMoneyBillAlt /> Fees
-          </Link>
-        </li>
-        <li>
-          <Link to="/teachers">
+        </li> */}
+        
+        {/* <li>
+          <Link to="/#">
             <FaChalkboardTeacher /> Faculty
           </Link>
-        </li>
+        </li> */}
         <li>
-          <Link to="/notice-board">
+          <Link to="#">
             <FaBullhorn /> Notice Board
           </Link>
         </li>
-        <li>
-          <Link to="/events">
-            <FaCalendarAlt /> Events
-          </Link>
-        </li>
+        
       </ul>
 
       <Link
