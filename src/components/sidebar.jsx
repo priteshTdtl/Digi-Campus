@@ -120,6 +120,7 @@ export default function Sidebar() {
           )}
         </li>
         <li>
+          <Link to="/fees">
           <Link to="/fees-structure">
             <FaMoneyBillAlt /> Fees
           </Link>
