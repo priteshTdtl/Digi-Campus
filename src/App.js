@@ -25,6 +25,7 @@ import StudentAttendance from "../src/pages/StudentAttendance";
 import Students from "../src/pages/Students";
 import Notice from "../src/pages/Notice"
 import EventForm from "../src/pages/Eventform";
+import Fees from "./components/Fees";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -79,6 +80,7 @@ const App = () => {
           <Route path="/students-attendance" element={<StudentAttendance />} />
           <Route path="/notice-board" element={<Notice />} />
           <Route path="/events" element={<EventForm />} />
+          <Route path="/fees" element={<Fees />} />
 
 
         </Routes>

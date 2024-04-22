@@ -1,4 +1,5 @@
 import DataTable from 'react-data-table-component';
+import Sidebar from "../components/sidebar";
 const columns = [
     {
         name: 'Name',
@@ -61,6 +62,15 @@ const data = [
 
 export default function Fees() {
 	return (
+        <>
+        <Sidebar />
+        <Sidebar />
+      <div className="container-fluid dashboard-area d-flex">
+        <div className="main-content p-4">
+          <div className="p-5">
+            <h2 className="d-flex justify-content-center mb-5">
+              Academic Student Fees
+            </h2>
 		<DataTable
             columns={columns}
             data={data}
@@ -70,5 +80,9 @@ export default function Fees() {
             paginationPerPage={10} 
             paginationRowsPerPageOptions={[5, 10, 20]} 
         />
+        </div>
+        </div>
+        </div>
+        </>
 	);
 };
