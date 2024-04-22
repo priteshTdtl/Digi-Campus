@@ -1,0 +1,116 @@
+.borrower {
+  border: none;
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 5px;
+}
+
+.close {
+  cursor: pointer;
+}
+
+.custom-modal {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+.edit-button {
+  color: rgb(252, 248, 248);
+  border: none;
+  padding: 10px 15px 10px 15px;
+}
+.btn-form {
+  color: white;
+  border: none;
+}
+/* .image-teacher{
+    height: 20vh;
+    width: 300px;
+} */
+.add-teacher-form {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* .form-control {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+} */
+.clipart-image {
+  height: 12rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Style table header */
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Style table rows */
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Style table data cells */
+td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Hover effect on rows */
+tr:hover {
+  background-color: #ddd;
+}
+.teacher-table {
+  overflow-x: scroll;
+}
+
+.clip-section{
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  z-index: 1000;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.icon-container {
+  gap: 5px;
+}
+.dashboard-area {
+  padding-left: 26rem;
+  transition: padding-left 0.3s ease;
+}
+.sidebar:not(.open) + .dashboard-area {
+  padding-left: 6rem;
+}
+
+.dashboard-area-2 {
+  align-content: space-between;
+  flex-wrap: wrap !important;
+  min-height: 90vh;
+  overflow: auto;
+}
+@media screen and (max-width: 767px) {
+  .dashboard-area {
+    padding-left: 5rem;
+  }
+}
