@@ -27,12 +27,8 @@ const UniversityLogin = () => {
         }
       );
       console.log("Login successful");
-      const token = response.data.JWT;
-      await axios.post("http://54.68.156.170:8000/university_extract_token/", {
-        token: token,
-      });
-      console.log("Token extracted successfully");
-  
+
+      localStorage.setItem("universityId", response.data.data.university_id);
       // Show success Swal
       Swal.fire({
         icon: "success",
@@ -41,11 +37,11 @@ const UniversityLogin = () => {
         confirmButtonText: "OK",
       }).then(() => {
         // Navigate to the Home page after the user clicks "OK"
-        navigate("/Home");
+        navigate("/University-home");
       });
     } catch (error) {
       console.error("Login failed:", error.response.data);
-  
+
       // Show error Swal
       Swal.fire({
         icon: "error",
@@ -98,7 +94,9 @@ const UniversityLogin = () => {
             <Link to="/adminLogin" className="back-to-login">
               <MdKeyboardBackspace fontSize={25} />
             </Link>{" "}
-            <a href="#" className="links">Forgot password?</a>
+            <a href="#" className="links">
+              Forgot password?
+            </a>
           </p>
         </form>
       </div>

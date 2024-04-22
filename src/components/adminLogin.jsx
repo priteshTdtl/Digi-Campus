@@ -50,11 +50,11 @@ const AdminLogin = () => {
           </p>
         </form>
         <div className="row d-flex justify-content-center w-100">
-          <div className="col-6">
+          {/* <div className="col-6">
             <span >
               <Link to="/collegeSignup" className="links">Register College</Link>
             </span>
-          </div>
+          </div> */}
           <div className="col-6">
             <span>
               <Link to="/universitySignup" className="links">Register University</Link>
@@ -62,14 +62,15 @@ const AdminLogin = () => {
           </div>
           <div className="col-6">
             <span>
-              <Link to="/collegeLogin" className="links">College Login</Link>
+              <Link to="/universityLogin " className="links">University Login</Link>
             </span>
           </div>
           <div className="col-6">
             <span>
-              <Link to="/universityLogin " className="links">University Login</Link>
+              <Link to="/collegeLogin" className="links">College Login</Link>
             </span>
           </div>
+          
         </div>
       </div>
     </div>

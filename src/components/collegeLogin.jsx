@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { MdKeyboardBackspace } from "react-icons/md";
 import axios from "axios"; // Import Axios for making HTTP requests
 import "../index.css";
+import Swal from "sweetalert2";
 
 const CollegeLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [universityId, setUniversityId] = useState("")
-  // const [collegeId, setCollegeId] = useState("")
+  const [universityId, setUniversityId] = useState("")
+  const [collegeId, setCollegeId] = useState("")
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -27,9 +28,16 @@ const CollegeLogin = () => {
       });
       const universityId = response.data.data.university_id
       const collegeId = response.data.data.college_id
-      // setUniversityId(university_id)
-      // setCollegeId(college_id)
-      handleLogin(universityId, collegeId);
+      setUniversityId(universityId)
+      setCollegeId(collegeId)
+      Swal.fire({
+        title: "Login Successful",
+        text: "You are now logged in",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+      localStorage.setItem("collegeId", response.data.data.college_id);
+
       navigate(`/Home`);
     } catch (error) {
       setError("Invalid email or password. Please try again.");
