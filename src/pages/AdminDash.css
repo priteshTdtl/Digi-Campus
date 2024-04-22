@@ -1,0 +1,114 @@
+.candidate {
+    height: 150px;
+    border-radius: 15px;
+
+}
+
+
+.admin {
+    height: 14em;
+    width: 30em;
+    margin-right: 1.5em;
+    border-radius: 15px;
+    background: linear-gradient(120deg, #807efc, rgb(217, 31, 227));
+    color: #000000;
+}
+
+.hr {
+    height: 14em;
+    width: 235px;
+    margin-right: 1.5em;
+    border-radius: 15px;
+    background: linear-gradient(120deg, #807efc, rgb(217, 31, 227));
+    color: #000000;
+}
+
+.headline {
+    text-align: left;
+    margin-top: 30px;
+    margin-left: 20px;
+    color: aliceblue;
+}
+
+.score {
+    text-align: left;
+    font-size: 25px;
+    margin-left: 20px;
+    color: aliceblue;
+
+}
+
+.ab {
+    background: linear-gradient(120deg, #807efc, rgb(217, 31, 227));
+    color: #000000;
+}
+
+
+
+.as {
+    height: 10%;
+    width: 10px;
+}
+
+.line {
+    width: 500px;
+    height: 100px;
+}
+
+.hr.horizontal {
+    background-color: transparent;
+}
+
+.hr.horizontal.dark {
+    background-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4), transparent);
+}
+
+
+
+
+@media (max-width: 767px) {
+
+    /* Styles for mobile devices */
+    .candidate,
+    .admin,
+    .hr {
+        height: 120px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .admin,
+    .hr {
+        width: auto;
+    }
+
+    .headline {
+        font-size: 16px;
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+
+    .score {
+        font-size: 18px;
+        margin-left: 10px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    /* Styles for tablets */
+    .admin {
+        width: 220px;
+    }
+
+    .hr {
+        width: 300px;
+    }
+}
+.admincardhover {
+    transition: transform 0.3s ease; 
+}
+
+.admincardhover:hover {
+    transform: scale(1.1);
+}

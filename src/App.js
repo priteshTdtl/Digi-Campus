@@ -27,6 +27,8 @@ import Notice from "../src/pages/Notice"
 import EventForm from "../src/pages/Eventform";
 import UniSidebar from "./components/UniSidebar";
 import Fees from "./pages/Fees";
+import JobPosting from "./pages/JobPosting";
+import AdminDash from "./pages/AdminDash";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -84,6 +86,8 @@ const App = () => {
           <Route path="/notice-board" element={<Notice />} />
           <Route path="/events" element={<EventForm />} />
           <Route path="/fees-structure" element={<Fees />} />
+          <Route path="/job-posting" element={<JobPosting />} />
+          <Route path="/admin-dashboard" element={<AdminDash />} />
 
 
 

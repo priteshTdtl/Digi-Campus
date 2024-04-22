@@ -65,19 +65,25 @@ const data = [
 export default function Fees() {
   return (
     <>
-      <Sidebar />
-      <div className="container-fluid dashboard-area d-flex">
-        <div className="main-content p-4">
-            <h2>D Y Patil College</h2>
-          <DataTable
-            columns={columns}
-            data={data}
-            striped
-            highlightOnHover
-            pagination
-          />
+        <Sidebar />
+        <div className="container-fluid dashboard-area d-flex">
+            <div className="main-content p-4">
+                <div className="p-5">
+                    <h2 className="d-flex justify-content-center mb-5">
+                        Academic Student Fees
+                    </h2>
+                    <DataTable
+                        columns={columns}
+                        data={data}
+                        striped={true}
+                        highlightOnHover={true}
+                        pagination={true}
+                        paginationPerPage={10}
+                        paginationRowsPerPageOptions={[5, 10, 20]}
+                    />
+                </div>
+            </div>
         </div>
-      </div>
     </>
-  );
+);
 }
