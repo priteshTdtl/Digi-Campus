@@ -7,8 +7,38 @@ import { MdWork } from "react-icons/md";
 import { FaUserCheck}  from "react-icons/fa";
 import { FaUserXmark } from "react-icons/fa6";
 import Sidebar from "../components/sidebar";
-
+import Chart from "chart.js/auto";
 class AdminDash extends Component {
+  constructor(props) {
+    super(props);
+    this.chartRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.buildChart();
+  }
+
+  buildChart() {
+    const myChartRef = this.chartRef.current.getContext("2d");
+
+    new Chart(myChartRef, {
+      type: "line",
+      data: {
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        datasets: [{
+          label: "Total Students",
+          data: [10, 20, 30, 25, 50, 45, 60],
+          borderColor: "rgba(255, 99, 132, 1)",
+          borderWidth: 2,
+          fill: false
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  }
   render() {
     return (
       <>
@@ -73,6 +103,14 @@ class AdminDash extends Component {
               </div>
             </div>
           </div>
+          <div className="col-md-12">
+              <canvas
+                id="myChart"
+                ref={this.chartRef}
+                width="400"
+                height="400"
+              ></canvas>
+            </div>
         </div>
       </>
     );

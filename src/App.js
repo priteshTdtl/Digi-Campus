@@ -29,6 +29,7 @@ import UniSidebar from "./components/UniSidebar";
 import Fees from "./pages/Fees";
 import JobPosting from "./pages/JobPosting";
 import AdminDash from "./pages/AdminDash";
+import JobList from "./pages/JobList";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -88,6 +89,7 @@ const App = () => {
           <Route path="/fees-structure" element={<Fees />} />
           <Route path="/job-posting" element={<JobPosting />} />
           <Route path="/admin-dashboard" element={<AdminDash />} />
+          <Route path="/job-list" element={<JobList />} />
 
 
 
