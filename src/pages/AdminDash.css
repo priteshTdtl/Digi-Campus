@@ -1,114 +1,91 @@
-.candidate {
-    height: 150px;
-    border-radius: 15px;
-
-}
-
-
-.admin {
+/* Styles for cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Ensure cards are evenly distributed */
+  }
+  
+  .card-body {
     height: 14em;
-    width: 30em;
-    margin-right: 1.5em;
+    /* width: calc(33.33% - 1.5em); Equal width for all cards */
+    margin-bottom: 1.5em; /* Add margin between cards */
     border-radius: 15px;
     background: linear-gradient(120deg, #807efc, rgb(217, 31, 227));
     color: #000000;
-}
-
-.hr {
-    height: 14em;
-    width: 235px;
-    margin-right: 1.5em;
-    border-radius: 15px;
-    background: linear-gradient(120deg, #807efc, rgb(217, 31, 227));
-    color: #000000;
-}
-
-.headline {
+  }
+  
+  /* Styles for card titles */
+  .headline {
     text-align: left;
-    margin-top: 30px;
-    margin-left: 20px;
+    margin-top: 1em;
+    margin-left: 2em;
+    padding-top: 1em;
     color: aliceblue;
-}
-
-.score {
+  }
+  
+  /* Styles for card scores */
+  .score {
     text-align: left;
-    font-size: 25px;
-    margin-left: 20px;
+    margin-left: 1em;
+    margin-top: -1.5em;
     color: aliceblue;
-
-}
-
-.ab {
-    background: linear-gradient(120deg, #807efc, rgb(217, 31, 227));
-    color: #000000;
-}
-
-
-
-.as {
-    height: 10%;
-    width: 10px;
-}
-
-.line {
-    width: 500px;
-    height: 100px;
-}
-
-.hr.horizontal {
-    background-color: transparent;
-}
-
-.hr.horizontal.dark {
-    background-image: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4), transparent);
-}
-
-
-
-
-@media (max-width: 767px) {
-
-    /* Styles for mobile devices */
-    .candidate,
-    .admin,
-    .hr {
-        height: 120px;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-
-    .admin,
-    .hr {
-        width: auto;
-    }
-
-    .headline {
-        font-size: 16px;
-        margin-top: 20px;
-        margin-left: 10px;
-    }
-
-    .score {
-        font-size: 18px;
-        margin-left: 10px;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-
-    /* Styles for tablets */
-    .admin {
-        width: 220px;
-    }
-
-    .hr {
-        width: 300px;
-    }
-}
-.admincardhover {
-    transition: transform 0.3s ease; 
-}
-
-.admincardhover:hover {
+  }
+  
+  /* Styles for icons within cards */
+  .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; 
+  }
+  
+  /* Hover effect for cards */
+  .admincardhover {
+    transition: transform 0.3s ease;
+  }
+  
+  .admincardhover:hover {
     transform: scale(1.1);
-}
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 767px) {
+    .card-body {
+      height: 20em;
+      margin-left: 10px;
+      margin-right: 10px;
+      width: calc(100% - 1.5em); /* Full width for cards on small screens */
+    }
+  
+    .headline {
+      font-size: 16px;
+      margin-top: 20px;
+      margin-left: 10px;
+    }
+  
+    .score {
+      font-size: 18px;
+      margin-left: 10px;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 991px) {
+    .card-body {
+      width: 15em; /* Adjust width for tablets */
+    }
+  }
+  
+  /* Styles for specific card arrangement */
+  .card-container-main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .card-container-sub {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px; /* Add margin between rows */
+  }
+  
