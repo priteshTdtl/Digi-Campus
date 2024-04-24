@@ -67,9 +67,9 @@ const CollegeSignup = () => {
   return (
     <>
       <UniSidebar />
-      <div className="container-fluid dashboard-area d-flex">
+      <div className="dash-root container-fluid dashboard-area d-flex">
         <div className="main-content p-4">
-          <div className="auth-wrapper dash-root">
+          <div className="auth-wrapper ">
             <div className="auth-inner College-signup-inner">
               <form onSubmit={handleCollegeSignup}>
                 <h3>College Registration</h3>

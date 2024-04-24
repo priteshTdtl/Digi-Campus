@@ -16,8 +16,6 @@ import { useLocation } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 
 const TypeMcqQuz = () => {
-  const location = useLocation();
-  const { examName } = location.state;
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctOption, setCorrectOption] = useState([]);
@@ -126,7 +124,7 @@ const TypeMcqQuz = () => {
               type="button"
               className="btn btn-danger btn-remove-option"
               onClick={() => handleRemoveOption(index)}
-              style={{ marginLeft: "8px",height:"25px" }}
+              style={{ marginLeft: "8px", height: "25px" }}
             >
               <FontAwesomeIcon icon={faTrash} />
             </button>
@@ -247,23 +245,17 @@ const TypeMcqQuz = () => {
       <Sidebar />
       <div className="container-fluid dashboard-area d-flex">
         <div className="main-content p-4">
-          <div className="wrapper">
+          <div className="w-75">
             <div className="main p-3">
-              <div className="single-type-mcq-quiz-container container mt-3">
-                <div
-                  style={{
-                    padding: "20px",
-                    maxWidth: "600px",
-                    margin: "0 auto",
-                  }}
-                >
+              <div className="container w-100 mt-3">
+                <div className="w-100">
                   <div style={{ marginBottom: "20px" }}>
-                    <h2>Add Questions for {examName} Exam</h2>
+                    <h2>Add Questions for...... Exam</h2>
 
                     <label htmlFor="question">Question:</label>
                     <textarea
                       id="question"
-                      className="form-control"
+                      className="form-control p-4"
                       value={question}
                       onChange={(e) => setQuestion(e.target.value)}
                       placeholder="Enter your question"
@@ -281,7 +273,7 @@ const TypeMcqQuz = () => {
                           type="button"
                           className="btn btn-danger ml-2"
                           onClick={handleMicStopClick}
-                          style={{marginLeft:"4px"}}
+                          style={{ marginLeft: "4px" }}
                         >
                           <FontAwesomeIcon icon={faStop} /> Stop
                         </button>
@@ -293,7 +285,7 @@ const TypeMcqQuz = () => {
                     <label htmlFor="type">Type:</label>
                     <select
                       id="type"
-                      className="form-control"
+                      className="form-select p-3"
                       value={type}
                       onChange={(e) => setType(e.target.value)}
                     >

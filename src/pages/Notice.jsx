@@ -3,6 +3,8 @@ import "../style/Notice.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Sidebar from "../components/sidebar";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 function Notice() {
   const [formData, setFormData] = useState({
@@ -15,6 +17,10 @@ function Notice() {
 
   const [notice, setNotice] = useState([]);
 
+  const collgeId = localStorage.getItem("collegeId");
+  const universityId = localStorage.getItem("universityId");
+
+
   const [body, setBody] = useState("");
 
   const handleChange = (e) => {
@@ -22,43 +28,56 @@ function Notice() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you can perform actions like sending data to a backend or storing it in state
-    const newNotice = {
-      title: formData.title,
-      date: formData.date,
-      to: formData.to,
-      from: formData.from,
-    };
-    console.log("Notice Title:", newNotice.title);
-    console.log("Notice Date:", newNotice.date);
-    console.log("Notice to:", newNotice.to);
-    console.log("Notice from:", newNotice.from);
-    // Add the new event to the list
-    setNotice([...notice, newNotice]);
-    // Reset the form after submission
-    setFormData({
-      title: "",
-      date: "",
-      to: "",
-      from: "",
-    });
+
+    try {
+      const newNotice = {
+        university_id : universityId,
+        college_id: collgeId,
+        title: formData.title,
+        publish_date: formData.date,
+        target_audience: formData.to,
+        from: formData.from,
+        content: body,
+      };
+      await axios.post("http://54.68.156.170:8000/add_notice/", newNotice);
+
+      console.log("Notice successfully submitted:", newNotice);
+      Swal.fire({
+        icon: "success",
+        title: "Notice successfully sent!",
+      });
+      setFormData({
+        title: "",
+        date: "",
+        to: "",
+        from: "",
+      });
+      setBody("")
+    } catch (error) {
+      console.error("Error submitting notice:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+    }
   };
 
   return (
     <>
       <Sidebar />
-      <div className="container-fluid dashboard-area d-flex">
+      <div className="dash-root container-fluid dashboard-area d-flex">
         <div className="main-content p-4">
-          <div className="dash-root d-flex justify-content-center p-5 ">
+          <div className=" d-flex justify-content-center p-5 ">
             <div className="card-notice mt-5">
               <div className="m-4 headingnotice d-flex justify-content-center">
                 <h2>College Notice </h2>
               </div>
               <div className="row m-4 justify-content-center">
                 <div className="col" md="6">
-                  <form onSubmit={handleSubmit}>
+                  <form >
                     <div className="mb-3">
                       <label htmlFor="title" className="form-label">
                         <b>Title/Subject:</b>
@@ -127,6 +146,7 @@ function Notice() {
                         <div className="col-12">
                           <ReactQuill
                             id="body"
+                            style={{height:"15rem"}}
                             value={body}
                             onChange={setBody}
                             className="body-box"
@@ -135,17 +155,13 @@ function Notice() {
                       </div>
                     </div>
 
-                    <div className="d-flex justify-content-center">
-                      <button
-                        className="p-2 m-2 bg-primary btn-submit"
-                        type="submit"
-                      >
-                        Send Notice
-                      </button>
-                    </div>
+                   
                   </form>
+               
                 </div>
+                
               </div>
+             
               {/* <div className="m-5 ">
             <h4>Event Details</h4>
         <table className="table">
@@ -167,7 +183,17 @@ function Notice() {
           </tbody>
         </table>
         </div> */}
+        <div className="d-flex justify-content-center">
+                      <button
+                        className="p-2 m-2 bg-primary btn-submit"
+                       
+                        onClick={handleSubmit}
+                      >
+                        Send Notice
+                      </button>
+                    </div>
             </div>
+            
           </div>
         </div>
       </div>

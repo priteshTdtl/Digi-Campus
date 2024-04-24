@@ -7,9 +7,6 @@ import "../style/addqueston.css";
 import Sidebar from "../components/sidebar";
 
 export default function AdjustSetting() {
-  const location = useLocation();
-  const { examName } = location.state;
-
   const [testName, setTestName] = useState("");
   const [introduction, setIntroduction] = useState("");
   const [colorScheme, setColorScheme] = useState("#ffffff");
@@ -47,7 +44,7 @@ export default function AdjustSetting() {
       <div className="container-fluid dashboard-area d-flex">
         <div className="main-content p-4">
           <div className="add-container">
-            <h2 className="exam-name">Adjust Settings for {examName}</h2>
+            <h2 className="exam-name">Adjust Settings for </h2>
             <form onSubmit={handleSubmit} className="form-container">
               <h3 className="section-title">Basic Settings</h3>
               <div className="row d-flex align-items-center">
@@ -60,7 +57,7 @@ export default function AdjustSetting() {
                   <input
                     type="text"
                     id="testName"
-                    value={examName}
+                    // value={examName}
                     onChange={(e) => setTestName(e.target.value)}
                     className="form-control"
                   />
@@ -94,7 +91,7 @@ export default function AdjustSetting() {
                   className="hue-picker"
                 />
               </div> */}
-              <div className="row " style={{marginTop:"6rem"}}>
+              <div className="row " style={{ marginTop: "6rem" }}>
                 <div className="col-12">
                   <label className="label text-dark fs-5">
                     Queston Settings
@@ -110,7 +107,9 @@ export default function AdjustSetting() {
                       checked={pagination === "showAll"}
                       onChange={() => setPagination("showAll")}
                     />
-                    <label style={{marginTop:"10px"}}>Show all the test questions on one page</label>
+                    <label style={{ marginTop: "10px" }}>
+                      Show all the test questions on one page
+                    </label>
                   </div>
                 </div>
                 <div className="col-12">
@@ -123,7 +122,9 @@ export default function AdjustSetting() {
                       checked={pagination === "onePerPage"}
                       onChange={() => setPagination("onePerPage")}
                     />
-                    <label style={{marginTop:"10px"}}>Show one item per page </label>
+                    <label style={{ marginTop: "10px" }}>
+                      Show one item per page{" "}
+                    </label>
                   </div>
                 </div>
               </div>

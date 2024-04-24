@@ -59,7 +59,7 @@ export default function UniSidebar() {
           </Link>
         </li>
         <li>
-          <Link to="/#">
+          <Link to="/active-college">
             <FaUserGraduate /> Active Colleges
           </Link>
           {/* <ul className="collapse list-unstyled" id="studentsSubmenu">
@@ -109,7 +109,7 @@ export default function UniSidebar() {
           </Link>
         </li> */}
         <li>
-          <Link to="#">
+          <Link to="/university-notice">
             <FaBullhorn /> Notice Board
           </Link>
         </li>
