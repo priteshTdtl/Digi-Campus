@@ -27,7 +27,7 @@ class AdminDash extends Component {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [{
           label: "Total Students",
-          data: [10, 20, 30, 25, 50, 45, 60],
+          data: [10, 20, 30, 25, 50, 45, 30],
           borderColor: "rgba(255, 99, 132, 1)",
           borderWidth: 2,
           fill: false

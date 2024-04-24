@@ -164,7 +164,6 @@ export default function Students() {
     {
       id: 19,
       name: "Andrew King",
-
       classroom: "Classroom 1",
       skills: "Data Analysis",
       grade: "B",
