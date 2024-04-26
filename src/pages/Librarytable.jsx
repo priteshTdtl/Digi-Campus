@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
+import DataTable from "react-data-table-component";
 import "../style/Librarytable.css";
 import { FaEye } from "react-icons/fa6";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Sidebar from "../components/sidebar";
-import axios from "axios"; // Import Axios for making HTTP requests
+import axios from "axios";
 import Swal from "sweetalert2";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 Modal.setAppElement("#root");
 
@@ -13,13 +17,19 @@ const LibraryTable = () => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [editable, setEditable] = useState(false);
-  // const [collegeName, setCollegeName] = useState("");
+  const [borrowerDetails, setBorrowerDetails] = useState([]);
+
+  const [studentDetails, setStudentDetails] = useState({
+    studentName: "",
+    email: "",
+    issueDate: "",
+    returnDate: "",
+  });
 
   const universityId = localStorage.getItem("universityId");
   const collgeId = localStorage.getItem("collegeId");
 
   useEffect(() => {
-    // fetchCollegeName();
     fetchBooks();
   }, []);
 
@@ -36,14 +46,267 @@ const LibraryTable = () => {
     }
   };
 
-  const handleBorrowerDetailsClick = (book) => {
-    setSelectedBook(book);
+  const columns = [
+    {
+      name: "Book Name",
+      selector: (row) => row.book_name,
+      sortable: true,
+    },
+    {
+      name: "Book ID",
+      selector: (row) => row.books_id,
+      sortable: true,
+    },
+    {
+      name: "Author Name",
+      selector: (row) => row.author,
+      sortable: true,
+    },
+    {
+      name: "ISBN No.",
+      selector: (row) => row.isbn_no,
+      sortable: true,
+    },
+    {
+      name: "Publish Year",
+      selector: (row) => row.publish_year,
+      sortable: true,
+    },
+    {
+      name: "Availability",
+      selector: (row) => row.available,
+      sortable: true,
+    },
+
+    {
+      name: "Borrower",
+      selector: (row) => row.borrower,
+      sortable: true,
+      cell: (row) => (
+        <>
+          {row.borrower}
+          <Popup
+  trigger={
+    <button
+      onClick={() => handleBorrowerDetailsClick(row.books_id)}
+      className="eye-icon ml-1"
+    >
+      <FaEye />
+    </button>
+  }
+  modal
+  nested
+  contentStyle={{
+    minHeight: '60vh',
+    overflowY: 'auto',
+  }}
+>
+  {(close) => (
+    <div className="p-3">
+      <h5 className="close mb-4 col-1" onClick={close}>
+        &times;
+      </h5>
+      <h2 className="ml-4">Borrower Details</h2>
+      <ul>
+        {borrowerDetails && borrowerDetails.length > 0 ? (
+          borrowerDetails.map((borrower, index) => (
+            <li key={index}>
+              Borrower: {borrower.first_name} {borrower.last_name}
+              <br />
+              PRN: {borrower.prn_no}
+              <br />
+              Issue Date: {formatDate(borrower.issue_date)}
+            </li>
+          ))
+        ) : (
+          <li className="text-center">No borrowers for this book</li>
+        )}
+      </ul>
+    </div>
+  )}
+</Popup>
+
+        </>
+      ),
+    },
+    {
+      name: "Stock",
+      selector: (row) => row.stock,
+      sortable: true,
+    },
+    {
+      name: "Issue",
+      cell: (row) => (
+        <>
+          {row.stock !== 0 && (
+            <Popup
+              contentStyle={{ borderRadius: "10px" }}
+              trigger={
+                <button
+                  className="btn btn-primary"
+                  onClick={() => handleIssueBookClick(row.books_id)}
+                >
+                  {" "}
+                  Issue Book{" "}
+                </button>
+              }
+              modal
+            >
+              <form className="p-5">
+                <div className="mb-3">
+                  {" "}
+                  <label htmlFor="studentName" className="form-label">
+                    Student Name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="studentName"
+                    value={studentDetails.studentName}
+                    onChange={(e) =>
+                      setStudentDetails({
+                        ...studentDetails,
+                        studentName: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="username" className="form-label">
+                    Username
+                  </label>
+                  <input
+                    type="username"
+                    className="form-control"
+                    id="username"
+                    value={studentDetails.username}
+                    onChange={(e) =>
+                      setStudentDetails({
+                        ...studentDetails,
+                        username: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="issueDate" className="form-label">
+                    Issue Date
+                  </label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="issueDate"
+                    value={studentDetails.issueDate}
+                    onChange={(e) =>
+                      setStudentDetails({
+                        ...studentDetails,
+                        issueDate: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="returnDate" className="form-label">
+                    Return Date
+                  </label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    id="returnDate"
+                    value={studentDetails.returnDate}
+                    onChange={(e) =>
+                      setStudentDetails({
+                        ...studentDetails,
+                        returnDate: e.target.value,
+                      })
+                    }
+                  />
+                </div>
+                <button
+                  type="button"
+                  style={{ fontSize: "13px" }}
+                  className="btn btn-success"
+                  onClick={() => handleModalSubmit(row.books_id)}
+                >
+                  Issue Book
+                </button>
+              </form>
+            </Popup>
+          )}
+        </>
+      ),
+    },
+  ];
+
+  const handleBorrowerDetailsClick = async (books_id) => {
+    setSelectedBook(books_id);
     setModalIsOpen(true);
+
+    try {
+      const response = await axios.post(
+        "http://54.68.156.170:8000/borrower_details/",
+        {
+          book_id: books_id,
+        }
+      );
+      console.log(response.data);
+      setBorrowerDetails(response.data);
+      // Handle response data as needed
+    } catch (error) {
+      console.log(error);
+      // Handle error as needed
+    }
   };
 
   const closeModal = () => {
     setSelectedBook(null);
     setModalIsOpen(false);
+  };
+
+  const handleIssueBookClick = (books_id) => {
+    setSelectedBook(books_id);
+    setModalIsOpen(true);
+  };
+
+  const handleModalSubmit = async (books_id) => {
+    try {
+      const response = await axios.post(
+        "http://54.68.156.170:8000/issue_book/",
+        {
+          book_id: books_id,
+          student_name: studentDetails.studentName,
+          prn_no: studentDetails.username,
+          issue_date: studentDetails.issueDate,
+          return_date: studentDetails.returnDate,
+        }
+      );
+
+      console.log(response.data);
+
+      Swal.fire({
+        title: "Success!",
+        text: `Book Issued to ${studentDetails.studentName}`,
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+
+      fetchBooks();
+
+      setStudentDetails({
+        studentName: "",
+        username: "",
+        returnDate: "",
+        issueDate: "",
+      });
+    } catch (error) {
+      console.error("Error issuing book:", error.message);
+      Swal.fire({
+        title: "Sorry!",
+        text: "Please Try After Sometime!",
+        icon: "info",
+        confirmButtonText: "OK",
+      });
+    }
   };
 
   const handleAddBook = async (newBook) => {
@@ -78,22 +341,13 @@ const LibraryTable = () => {
     }
   };
 
-  // const handleDeleteBook = async (bookId) => {
-  //   try {
-  //     await axios.delete(`http://54.68.156.170:8000/delete_book/${bookId}`);
-  //     const updatedBooks = books.filter((book) => book.bookId !== bookId);
-  //     setBooks(updatedBooks);
-  //     Swal.fire({
-  //       title: "Success!",
-  //       text: "Book deleted successfully!",
-  //       icon: "success",
-  //       confirmButtonText: "OK",
-  //     });
-  //   } catch (error) {
-  //     console.error("Error deleting book:", error);
-  //     alert("Failed to delete book. Please try again later.");
-  //   }
-  // };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
 
   return (
     <>
@@ -101,71 +355,26 @@ const LibraryTable = () => {
       <div className="container-fluid dashboard-area d-flex">
         <div className="main-content p-4">
           <div className="p-5">
-            <h2 className="d-flex justify-content-center mt-2">
+            <h2 className="lib-head d-flex justify-content-center mt-2">
               Welcome to the Library!
             </h2>
-            {/* <h3 className="mt-4 d-flex justify-content-center">
-              {collegeName}
-            </h3> */}
-
             <div>
               <button
                 onClick={() => setEditable(!editable)}
-                className="btn btn-primary fs-4 my-3"
+                className={`btn-addbook mb-4 p-2 ${
+                  editable ? "btn btn-warning" : "btn btn-primary"
+                }`}
               >
-                {editable ? "Save" : "Add Book"}
+                {editable ? "Close" : "Add Book"}
               </button>
+
               {editable ? <AddBookForm onAddBook={handleAddBook} /> : null}
             </div>
 
             <div className="lib-table">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Book Name</th>
-                    <th>Book ID</th>
-                    <th>Author Name</th>
-                    <th>ISBN No.</th>
-                    <th>Publish Year</th>
-                    <th>Availability</th>
-                    <th>Borrower</th>
-                    {/* <th>Action</th> */}
-                  </tr>
-                </thead>
-                <tbody>
-                  {books.map((book) => (
-                    <tr key={book.books_id}>
-                      <td>{book.book_name}</td>
-                      <td>{book.books_id}</td>
-                      <td>{book.author}</td>
-                      <td>{book.isbn_no}</td>
-                      <td>{book.publish_year}</td>
-                      <td>{book.availability}</td>
-                      <td>
-                        {book.borrower}
-                        {book.borrower !== "N/A" && (
-                          <button
-                            onClick={() => handleBorrowerDetailsClick(book)}
-                            className="eye-icon ml-1"
-                          >
-                            <FaEye />
-                          </button>
-                        )}
-                      </td>
-                      {/* <td>
-                        <button
-                          onClick={() => handleDeleteBook(book.books_id)}
-                          className="dlt-btn bg-primary"
-                        >
-                          Delete
-                        </button>
-                      </td> */}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <DataTable columns={columns} data={books} pagination />
             </div>
-            <Modal
+            {/* <Modal
               isOpen={modalIsOpen}
               onRequestClose={closeModal}
               className="popup2-content"
@@ -176,21 +385,22 @@ const LibraryTable = () => {
                 </h5>
                 <h2 className="ml-4">Borrower Details</h2>
                 <ul>
-                  {selectedBook && (
-                    <>
-                      <li>Borrower: {selectedBook.borrower}</li>
-                      <li>Issue Date: {selectedBook.issueDate}</li>
-                      <li>Return Date: {selectedBook.returnDate}</li>
-                      <li>
-                        Year & Department: {selectedBook.year} &{" "}
-                        {selectedBook.department}
+                  {borrowerDetails && borrowerDetails.length > 0 ? (
+                    borrowerDetails.map((borrower, index) => (
+                      <li key={index}>
+                        Borrower: {borrower.first_name} {borrower.last_name}
+                        <br />
+                        PRN: {borrower.prn_no}
+                        <br />
+                        Issue Date: {formatDate(borrower.issue_date)}
                       </li>
-                      <li>Division: {selectedBook.division}</li>
-                    </>
+                    ))
+                  ) : (
+                    <li className="text-center">No borrowers for this book</li>
                   )}
                 </ul>
               </div>
-            </Modal>
+            </Modal> */}
           </div>
         </div>
       </div>
@@ -204,6 +414,7 @@ const AddBookForm = ({ onAddBook }) => {
     authorName: "",
     ISBN: "",
     publishYear: "",
+    stock: "",
     availability: "Available",
     borrower: "N/A",
   });
@@ -229,6 +440,7 @@ const AddBookForm = ({ onAddBook }) => {
       bookName: "",
       authorName: "",
       ISBN: "",
+      stock: "",
       publishYear: "",
       availability: "Available",
       borrower: "N/A",
@@ -236,61 +448,77 @@ const AddBookForm = ({ onAddBook }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="add-book-form mb-4">
-      <div className="row d-flex align-items-center">
-        <div className="col-2">
-          <img
-            src="https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books_23-2149334866.jpg?w=740&t=st=1713433024~exp=1713433624~hmac=3a0b15d83fb51763678c0d9497a31804cf7095609bb20e2862ab09d08a1422d4"
-            className="book-img img-fluid"
-          />
-        </div>
-        <div className="col-2">
-          <input
-            className="form-control"
-            type="text"
-            name="bookName"
-            value={newBook.bookName}
-            onChange={handleChange}
-            placeholder="Book Name"
-          />
-        </div>
-        <div className="col-2">
-          <input
-            className="form-control"
-            type="text"
-            name="authorName"
-            value={newBook.authorName}
-            onChange={handleChange}
-            placeholder="Author Name"
-          />
-        </div>
-        <div className="col-2">
-          <input
-            className="form-control"
-            type="text"
-            name="ISBN"
-            value={newBook.ISBN}
-            onChange={handleChange}
-            placeholder="ISBN"
-          />
-        </div>
-        <div className="col-2">
-          <input
-            className="form-control"
-            type="number"
-            name="publishYear"
-            value={newBook.publishYear}
-            onChange={handleChange}
-            placeholder="Publish Year"
-          />
-        </div>
-        <div className="col-2">
-          <button type="submit" className="btn btn-success mb-3">
-            Add Book
-          </button>
-        </div>
+    <div className="row">
+      <div className="col-lg-12">
+        <form onSubmit={handleSubmit} className="add-book-form mb-4">
+          <div className="row d-flex align-items-center">
+            <div className="col-2">
+              <img
+                src="https://img.freepik.com/free-vector/hand-drawn-flat-design-stack-books_23-2149334866.jpg?w=740&t=st=1713433024~exp=1713433624~hmac=3a0b15d83fb51763678c0d9497a31804cf7095609bb20e2862ab09d08a1422d4"
+                className="book-img "
+              />
+            </div>
+            <div className="col-2">
+              <input
+                className="form-control"
+                type="text"
+                name="bookName"
+                value={newBook.bookName}
+                onChange={handleChange}
+                placeholder="Book Name"
+              />
+            </div>
+            <div className="col-2">
+              <input
+                className="form-control"
+                type="text"
+                name="authorName"
+                value={newBook.authorName}
+                onChange={handleChange}
+                placeholder="Author Name"
+              />
+            </div>
+            <div className="col-2">
+              <input
+                className="form-control"
+                type="text"
+                name="ISBN"
+                value={newBook.ISBN}
+                onChange={handleChange}
+                placeholder="ISBN"
+              />
+            </div>
+            <div className="col-2">
+              <input
+                className="form-control"
+                type="text"
+                name="stock"
+                value={newBook.stock}
+                onChange={handleChange}
+                placeholder="stock"
+              />
+            </div>
+            <div className="col-2">
+              <input
+                className="form-control"
+                type="number"
+                name="publishYear"
+                value={newBook.publishYear}
+                onChange={handleChange}
+                placeholder="Publish Year"
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12 d-flex justify-content-center text-center">
+              <button type="submit" className="btn btn-success mb-3">
+                Add Book
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   );
 };
 

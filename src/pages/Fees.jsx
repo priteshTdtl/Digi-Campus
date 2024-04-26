@@ -29,6 +29,11 @@ const columns = [
     sortable: true,
   },
   {
+    name: "Fees Paid Date",
+    selector: (row) => row.feesPaidDate,
+    sortable: true,
+  },
+  {
     name: "Balance",
     selector: (row) => row.balance,
     sortable: true,
@@ -42,6 +47,7 @@ const data = [
     academicYear: "2023-2024",
     totalFees: 10000,
     feesPaid: 5000,
+    feesPaidDate: "01-08-2022",
     balance: 5000,
   },
   {
@@ -50,6 +56,7 @@ const data = [
     academicYear: "2023-2024",
     totalFees: 12000,
     feesPaid: 6000,
+    feesPaidDate: "01-04-2022",
     balance: 6000,
   },
   {
@@ -58,6 +65,7 @@ const data = [
     academicYear: "2023-2024",
     totalFees: 15000,
     feesPaid: 8000,
+    feesPaidDate: "11-04-2022",
     balance: 7000,
   },
 ];
@@ -65,25 +73,32 @@ const data = [
 export default function Fees() {
   return (
     <>
-        <Sidebar />
-        <div className="container-fluid dashboard-area d-flex">
-            <div className="main-content p-4">
-                <div className="p-5">
-                    <h2 className="d-flex justify-content-center mb-5">
-                        Academic Student Fees
-                    </h2>
-                    <DataTable
-                        columns={columns}
-                        data={data}
-                        striped={true}
-                        highlightOnHover={true}
-                        pagination={true}
-                        paginationPerPage={10}
-                        paginationRowsPerPageOptions={[5, 10, 20]}
-                    />
-                </div>
+      <Sidebar />
+      <div className="container-fluid dashboard-area d-flex">
+        <div className="main-content p-4">
+          <div className="row pt-3">
+            <div className="col-12 text-center">
+              <h2>D Y Patil College of Engineering and Research</h2>
+              <p>Pune</p>
             </div>
+          </div>
+          <DataTable
+            columns={columns}
+            data={data}
+            striped
+            highlightOnHover
+            pagination
+            customStyles={{
+                headRow: {
+                  style: {
+                    backgroundColor: "#f0f0f0",
+                    fontWeight: "bold",
+                  },
+                },
+              }}
+          />
         </div>
+      </div>
     </>
 );
 }

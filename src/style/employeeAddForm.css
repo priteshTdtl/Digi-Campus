@@ -3,7 +3,7 @@
         height: 100vh;
     }
 .card-form{
-    width: 35em;
+    width: 100%;
     background-color: azure;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);}
 .headingregistration{

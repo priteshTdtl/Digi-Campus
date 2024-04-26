@@ -23,13 +23,20 @@ import AddEdtQueston from "../src/pages/AddEdtQueston";
 import ViewResults from "../src/pages/ViewResults";
 import StudentAttendance from "../src/pages/StudentAttendance";
 import Students from "../src/pages/Students";
-import Notice from "../src/pages/Notice"
+import Notice from "../src/pages/Notice";
 import EventForm from "../src/pages/Eventform";
 import UniSidebar from "./components/UniSidebar";
 import Fees from "./pages/Fees";
+<<<<<<< HEAD
 import JobPosting from "./pages/JobPosting";
 import AdminDash from "./pages/AdminDash";
 import JobList from "./pages/JobList";
+=======
+import ActiveCollege from "./pages/ActiveCollege";
+import UniversityNotice from "./pages/UniversityNotice";
+import CollegeDashboard from "./pages/CollegeDashboard"
+import ViewEmployees from "./pages/ViewEmployees"
+>>>>>>> 06b6b48754b9eef403f06529bb67a1c307040ad9
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -50,7 +57,6 @@ const App = () => {
     setUniversityId(universityId);
     setCollegeId(collegeId);
   };
-  
 
   return (
     <Router>
@@ -70,11 +76,16 @@ const App = () => {
           <Route path="/universityLogin" element={<UniversityLogin />} />
           <Route path="/collegeSignup" element={<CollegeSignup />} />
           <Route path="/collegeLogin" element={<CollegeLogin />} />
-          <Route path="/Home" element={<Sidebar />} />
+          <Route path="/Home" element={<CollegeDashboard  />} />
           <Route path="/University-home" element={<UniSidebar />} />
 
           <Route path="/add-employee" element={<EmployeeAddForm />} />
-          <Route path="/library" element={<LibraryTable universityId={universityId} collegeId={collegeId} />} />
+          <Route
+            path="/library"
+            element={
+              <LibraryTable universityId={universityId} collegeId={collegeId} />
+            }
+          />
           <Route path="/teachers" element={<TeacherTable />} />
           <Route path="/add-exam" element={<AddExam />} />
           <Route path="/addquestion" element={<AddQuestion />} />
@@ -87,11 +98,17 @@ const App = () => {
           <Route path="/notice-board" element={<Notice />} />
           <Route path="/events" element={<EventForm />} />
           <Route path="/fees-structure" element={<Fees />} />
+<<<<<<< HEAD
           <Route path="/job-posting" element={<JobPosting />} />
           <Route path="/admin-dashboard" element={<AdminDash />} />
           <Route path="/job-list" element={<JobList />} />
 
 
+=======
+          <Route path="/active-college" element={<ActiveCollege />} />
+          <Route path="/university-notice" element={<UniversityNotice />} />
+          <Route path="/view-employees" element={<ViewEmployees />} />
+>>>>>>> 06b6b48754b9eef403f06529bb67a1c307040ad9
 
         </Routes>
       </div>

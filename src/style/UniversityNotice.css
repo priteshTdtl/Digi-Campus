@@ -1,0 +1,54 @@
+.dash-root{
+    background: linear-gradient(90deg, #3e46aa, #e620cf);
+    height: 100%;
+    
+}
+
+.uni-noticesbhead{
+    color: red;
+    text-align: center;
+    font-size: 12px;
+}
+
+.card-noticeuniversity{
+width: 35em;
+background-color: azure;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+border-radius: 10px;
+
+}
+
+
+
+.headingnoticeuniversity{
+color:#3e46aa;
+font-family: "calligraphy";
+font-weight: 600;
+
+}
+
+
+.btn-submit{
+color: white;
+border: none;
+background: linear-gradient(90deg, #3e46aa, #e620cf);
+}
+
+#body{
+    background-color: white;
+    overflow-y: auto;
+}
+
+.body-box .ql-editor {
+    height: 10vh; 
+    overflow-y: auto; 
+  }
+
+ .text-dark{
+    background-color: white;
+    margin-top: -20px;
+ }
+
+ .note{
+    font-size: 10px;
+ }

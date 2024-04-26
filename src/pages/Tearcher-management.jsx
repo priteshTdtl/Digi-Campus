@@ -4,8 +4,8 @@ import DataTable from "react-data-table-component";
 import Sidebar from "../components/sidebar";
 import clipart from "../images/emp.png";
 import "../style/Global.css";
-import "../style/Teacher-management.css"
-import teacher from "../images/teacher123.jpg"
+import "../style/Teacher-management.css";
+import teacher from "../images/teacher123.jpg";
 import Swal from "sweetalert2";
 
 const TeacherTable = () => {
@@ -16,10 +16,20 @@ const TeacherTable = () => {
     fetchTeachers();
   }, []);
 
+  const collgeId = localStorage.getItem("collegeId");
+  const universityId = localStorage.getItem("universityId");
+
   const fetchTeachers = async () => {
     try {
-      const response = await axios.get("http://your-api-url/teachers");
+      const response = await axios.post(
+        "http://54.68.156.170:8000/teacher_list/",
+        {
+          college_id: collgeId,
+        }
+      );
+      console.log("Response data:", response.data);
       setTeachers(response.data);
+      console.log("Teachers Data: ", teachers);
     } catch (error) {
       console.error("Error fetching teachers:", error);
     }
@@ -27,45 +37,34 @@ const TeacherTable = () => {
 
   const handleAddTeacher = async (newTeacher) => {
     try {
-      const response = await axios.post("http:// /add_teacher", newTeacher);
-      const { data } = response;
-      setTeachers([...teachers, data]);
-      // Optionally, you can display a success message here
-      Swal.fire ({
-        title: "Success!",
-        text: "Teacher added successfully!",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
+      const payload = {
+        college_id: collgeId,
+        university_id: universityId,
+        allocated_subjects: newTeacher.Allocatedsubject,
+        department: newTeacher.Department,
+        email: newTeacher.EmailID,
+      };
+      const response = await axios.post(
+        "http://54.68.156.170:8000/allocate_teacher/",
+        payload
+      );
+      // const data = response.data;
+
+      // Display a success message only when the request is successful
+      if (response.status === 201 || response.status === 200) {
+        Swal.fire({
+          title: "Success!",
+          text: "Teacher added successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      }
     } catch (error) {
       console.error("Error adding teacher:", error);
-      // Optionally, you can display an error message here
-      Swal.fire ({
+      // Display an error message when an error occurs during the request
+      Swal.fire({
         title: "Error!",
         text: "Error adding teacher!",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-    }
-  };
-
-  const deleteTeacher = async (teacherId) => {
-    try {
-      await axios.delete(`http://your-api-url/delete_teacher/${teacherId}`);
-      const updatedTeachers = teachers.filter((teacher) => teacher.id !== teacherId);
-      setTeachers(updatedTeachers);
-      Swal.fire ({
-        title: "Success!",
-        text: "Teacher deleted successfully!",
-        icon: "success",
-        confirmButtonText: "OK",
-      });
-    } catch (error) {
-      console.error("Error deleting teacher:", error);
-      // Optionally, you can display an error message here
-      Swal.fire ({
-        title: "Error!",
-        text: "Error deleting teacher!",
         icon: "error",
         confirmButtonText: "OK",
       });
@@ -75,40 +74,40 @@ const TeacherTable = () => {
   const columns = [
     {
       name: "Teacher Name",
-      selector: "TeacherName",
+      selector: (row) => row.first_name + " " + row.last_name,
       sortable: true,
     },
     {
       name: "Email ID",
-      selector: "EmailID",
+      selector: (row) => row.email,
       sortable: true,
     },
     {
       name: "Mobile",
-      selector: "phoneno",
+      selector: (row) => row.phone_number,
       sortable: true,
     },
     {
       name: "Department",
-      selector: "Department",
+      selector: (row) => row.department,
       sortable: true,
     },
     {
       name: "Allocated Subject",
-      selector: "Allocatedsubject",
+      selector: (row) => row.allocated_subjects,
       sortable: true,
     },
-    {
-      name: "Action",
-      cell: (row) => (
-        <button
-          className="edit-button bg-primary"
-          onClick={() => deleteTeacher(row.id)}
-        >
-          Delete
-        </button>
-      ),
-    },
+    // {
+    //   name: "Action",
+    //   cell: (row) => (
+    //     <button
+    //       className="edit-button bg-primary"
+    //       onClick={() => deleteTeacher(row.id)}
+    //     >
+    //       Delete
+    //     </button>
+    //   ),
+    // },
   ];
 
   return (
@@ -149,11 +148,18 @@ const TeacherTable = () => {
               <DataTable
                 columns={columns}
                 data={teachers}
-                noHeader
                 pagination
                 dense
+                highlightOnHover
                 striped
-                selectableRows
+                customStyles={{
+                  headRow: {
+                    style: {
+                      backgroundColor: "#f0f0f0",
+                      fontWeight: "bold",
+                    },
+                  },
+                }}
               />
             </div>
           </div>

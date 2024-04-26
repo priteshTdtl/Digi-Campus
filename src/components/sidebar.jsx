@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./sidebar.css";
 import { FaSignOutAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { PiOfficeChairFill } from "react-icons/pi";
 import {
   FaHome,
   FaBook,
@@ -17,9 +18,14 @@ import {
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenE, setIsOpenE] = useState(false);
+
 
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
+  };
+  const toggleAccordion2 = () => {
+    setIsOpenE(!isOpenE);
   };
   const handleLogout = () => {
     // Display confirmation Swal
@@ -39,7 +45,7 @@ export default function Sidebar() {
   };
 
   return (
-    <div id="sidebar">
+    <div id="sidebar" style={{minHeight:"100vh", overflow:"auto"}}>
       <div className="pt-4 text-white">
         
         <h2>DIGI</h2>
@@ -52,23 +58,7 @@ export default function Sidebar() {
           <Link to="/Home">
             <FaHome /> Home
           </Link>
-          {/* <ul className="collapse list-unstyled" id="homeSubmenu">
-            <li>
-              <Link to="#">
-                <FaHome /> Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                <FaHome /> Profile
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                <FaHome /> Settings
-              </Link>
-            </li>
-          </ul> */}
+         
         </li>
         <li>
           <Link to="/library">
@@ -79,23 +69,6 @@ export default function Sidebar() {
           <Link to="/students">
             <FaUserGraduate /> Students
           </Link>
-          {/* <ul className="collapse list-unstyled" id="studentsSubmenu">
-            <li>
-              <Link to="#">
-                <FaUserGraduate /> View Students
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                <FaUserGraduate /> Add Student
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                <FaUserGraduate /> Student Attendance
-              </Link>
-            </li>
-          </ul> */}
         </li>
         <li onClick={toggleAccordion}>
           <Link to="#">
@@ -108,9 +81,7 @@ export default function Sidebar() {
                   Add exam
                 </Link>
               </li>
-              {/* <li>
-              <Link to="/publish-distribute" style={{ color: 'black' }}>Publish</Link>
-            </li> */}
+             
               <li>
                 <Link to="/view-results" style={{ color: "black" }}>
                   View result
@@ -129,6 +100,26 @@ export default function Sidebar() {
           <Link to="/teachers">
             <FaChalkboardTeacher /> Faculty
           </Link>
+        </li>
+        <li onClick={toggleAccordion2}>
+          <Link to="#">
+            <PiOfficeChairFill /> Employee
+          </Link>
+          {isOpenE && (
+            <ul className="nested">
+              <li>
+                <Link to="/add-employee" style={{ color: "black" }}>
+                  Register
+                </Link>
+              </li>
+             
+              <li>
+                <Link to="/view-employees" style={{ color: "black" }}>
+                  View All
+                </Link>
+              </li>
+            </ul>
+          )}
         </li>
         <li>
           <Link to="/notice-board">
