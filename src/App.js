@@ -38,6 +38,7 @@ import JobCard from "./pages/JobCard"
 import Jobpost from "./pages/JobPosting"
 import PlaceStudent from "./pages/PlaceStudent";
 import Assignment from "./pages/Assignment"
+import AppliedJob from "./pages/AppliedJob";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -111,6 +112,7 @@ const App = () => {
           <Route path="/job-posting" element={<Jobpost />} />
           <Route path="/placed-students" element={<PlaceStudent />} />
           <Route path="/students-assignment" element={<Assignment />} />
+          <Route path="/applied-jobs" element={<AppliedJob />} />
 
 
 
