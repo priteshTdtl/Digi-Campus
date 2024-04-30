@@ -27,16 +27,17 @@ import Notice from "../src/pages/Notice";
 import EventForm from "../src/pages/Eventform";
 import UniSidebar from "./components/UniSidebar";
 import Fees from "./pages/Fees";
-<<<<<<< HEAD
-import JobPosting from "./pages/JobPosting";
-import AdminDash from "./pages/AdminDash";
-import JobList from "./pages/JobList";
-=======
 import ActiveCollege from "./pages/ActiveCollege";
 import UniversityNotice from "./pages/UniversityNotice";
 import CollegeDashboard from "./pages/CollegeDashboard"
 import ViewEmployees from "./pages/ViewEmployees"
->>>>>>> 06b6b48754b9eef403f06529bb67a1c307040ad9
+import EmployeeLogin from "./components/EmployeeLogin"
+import EmpSidebar from "./components/EmpSidebar"
+import Joblist from "./pages/JobList"
+import JobCard from "./pages/JobCard"
+import Jobpost from "./pages/JobPosting"
+import PlaceStudent from "./pages/PlaceStudent";
+import Assignment from "./pages/Assignment"
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -76,6 +77,10 @@ const App = () => {
           <Route path="/universityLogin" element={<UniversityLogin />} />
           <Route path="/collegeSignup" element={<CollegeSignup />} />
           <Route path="/collegeLogin" element={<CollegeLogin />} />
+          <Route path="/employee-Login" element={<EmployeeLogin />} />
+          <Route path="/staff-portal" element={<EmpSidebar />} />
+
+
           <Route path="/Home" element={<CollegeDashboard  />} />
           <Route path="/University-home" element={<UniSidebar />} />
 
@@ -98,17 +103,19 @@ const App = () => {
           <Route path="/notice-board" element={<Notice />} />
           <Route path="/events" element={<EventForm />} />
           <Route path="/fees-structure" element={<Fees />} />
-<<<<<<< HEAD
-          <Route path="/job-posting" element={<JobPosting />} />
-          <Route path="/admin-dashboard" element={<AdminDash />} />
-          <Route path="/job-list" element={<JobList />} />
-
-
-=======
           <Route path="/active-college" element={<ActiveCollege />} />
           <Route path="/university-notice" element={<UniversityNotice />} />
           <Route path="/view-employees" element={<ViewEmployees />} />
->>>>>>> 06b6b48754b9eef403f06529bb67a1c307040ad9
+          <Route path="/job-list" element={<Joblist />} />
+          <Route path="/job-card" element={<JobCard />} />
+          <Route path="/job-posting" element={<Jobpost />} />
+          <Route path="/placed-students" element={<PlaceStudent />} />
+          <Route path="/students-assignment" element={<Assignment />} />
+
+
+
+
+
 
         </Routes>
       </div>

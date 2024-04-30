@@ -91,7 +91,6 @@ export default function Sidebar() {
           )}
         </li>
         <li>
-          
           <Link to="/fees-structure">
             <FaMoneyBillAlt /> Fees
           </Link>

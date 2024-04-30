@@ -86,46 +86,56 @@ const LibraryTable = () => {
         <>
           {row.borrower}
           <Popup
-  trigger={
-    <button
-      onClick={() => handleBorrowerDetailsClick(row.books_id)}
-      className="eye-icon ml-1"
-    >
-      <FaEye />
-    </button>
-  }
-  modal
-  nested
-  contentStyle={{
-    minHeight: '60vh',
-    overflowY: 'auto',
-  }}
->
-  {(close) => (
-    <div className="p-3">
-      <h5 className="close mb-4 col-1" onClick={close}>
-        &times;
-      </h5>
-      <h2 className="ml-4">Borrower Details</h2>
-      <ul>
-        {borrowerDetails && borrowerDetails.length > 0 ? (
-          borrowerDetails.map((borrower, index) => (
-            <li key={index}>
-              Borrower: {borrower.first_name} {borrower.last_name}
-              <br />
-              PRN: {borrower.prn_no}
-              <br />
-              Issue Date: {formatDate(borrower.issue_date)}
-            </li>
-          ))
-        ) : (
-          <li className="text-center">No borrowers for this book</li>
-        )}
-      </ul>
-    </div>
-  )}
-</Popup>
-
+            trigger={
+              <button className="eye-icon ml-1">
+                <FaEye
+                  onClick={() => handleBorrowerDetailsClick(row.books_id)}
+                />
+              </button>
+            }
+            modal
+            nested
+            contentStyle={{
+              minHeight: "60vh",
+              overflowY: "auto",
+            }}
+          >
+            {(close) => (
+              <div className="p-3">
+                <h5 className="close mb-4 col-1" onClick={close}>
+                  &times;
+                </h5>
+                <h2 className="ml-4">Borrower Details</h2>
+                <ul>
+                  {borrowerDetails && borrowerDetails.length > 0 ? (
+                    borrowerDetails.map((borrower, index) => (
+                      <li
+                        key={index}
+                        style={{ padding: "10px", fontSize: "larger" }}
+                      >
+                        Borrower: {borrower.first_name} {borrower.last_name}
+                        <br />
+                        PRN: {borrower.prn_no}
+                        <br />
+                        Issue Date: {formatDate(borrower.issue_date)}
+                        <br />
+                        <button
+                          onClick={() => handleReturnBook(borrower.issue_id)}
+                          className={`btn ${
+                            borrower.returned ? "btn-success" : "btn-warning"
+                          }`}
+                        >
+                          {borrower.returned ? "Returned" : "Return"}
+                        </button>
+                      </li>
+                    ))
+                  ) : (
+                    <li className="text-center">No borrowers for this book</li>
+                  )}
+                </ul>
+              </div>
+            )}
+          </Popup>
         </>
       ),
     },
@@ -173,7 +183,7 @@ const LibraryTable = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="username" className="form-label">
-                    Username
+                    PRN
                   </label>
                   <input
                     type="username"
@@ -205,23 +215,7 @@ const LibraryTable = () => {
                     }
                   />
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="returnDate" className="form-label">
-                    Return Date
-                  </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    id="returnDate"
-                    value={studentDetails.returnDate}
-                    onChange={(e) =>
-                      setStudentDetails({
-                        ...studentDetails,
-                        returnDate: e.target.value,
-                      })
-                    }
-                  />
-                </div>
+
                 <button
                   type="button"
                   style={{ fontSize: "13px" }}
@@ -238,6 +232,49 @@ const LibraryTable = () => {
     },
   ];
 
+  const handleReturnBook = async (issueId) => {
+    try {
+      const response = await axios.post(
+        "http://54.68.156.170:8000/return_book/",
+        {
+          issue_id: issueId,
+          return_date: new Date().toISOString().split("T")[0], // Get current date in YYYY-MM-DD format
+        }
+      );
+
+      if (response.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Book returned successfully.",
+        });
+        // Update borrower details to mark the book as returned
+        const updatedBorrowerDetails = borrowerDetails.map((borrower) => {
+          if (borrower.issue_id === issueId) {
+            return { ...borrower, returned: true }; // Set returned flag to true
+          }
+          return borrower;
+        });
+        setBorrowerDetails(updatedBorrowerDetails); // Update borrower details state
+        console.log("Book returned successfully:", response.data);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error!",
+          text: "Failed to return book. Please try again later.",
+        });
+        console.error("Error returning book:", response);
+      }
+    } catch (error) {
+      console.error("Error returning book:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: "Failed to return book. Please try again later.",
+      });
+    }
+  };
+
   const handleBorrowerDetailsClick = async (books_id) => {
     setSelectedBook(books_id);
     setModalIsOpen(true);
@@ -249,7 +286,8 @@ const LibraryTable = () => {
           book_id: books_id,
         }
       );
-      console.log(response.data);
+      console.log("API RESPONSE: ", response.data);
+
       setBorrowerDetails(response.data);
       // Handle response data as needed
     } catch (error) {
@@ -374,33 +412,6 @@ const LibraryTable = () => {
             <div className="lib-table">
               <DataTable columns={columns} data={books} pagination />
             </div>
-            {/* <Modal
-              isOpen={modalIsOpen}
-              onRequestClose={closeModal}
-              className="popup2-content"
-            >
-              <div className="modal-content p-3">
-                <h5 className="close mb-4 col-1" onClick={closeModal}>
-                  &times;
-                </h5>
-                <h2 className="ml-4">Borrower Details</h2>
-                <ul>
-                  {borrowerDetails && borrowerDetails.length > 0 ? (
-                    borrowerDetails.map((borrower, index) => (
-                      <li key={index}>
-                        Borrower: {borrower.first_name} {borrower.last_name}
-                        <br />
-                        PRN: {borrower.prn_no}
-                        <br />
-                        Issue Date: {formatDate(borrower.issue_date)}
-                      </li>
-                    ))
-                  ) : (
-                    <li className="text-center">No borrowers for this book</li>
-                  )}
-                </ul>
-              </div>
-            </Modal> */}
           </div>
         </div>
       </div>

@@ -4,16 +4,7 @@ import { Link } from "react-router-dom";
 import "./sidebar.css";
 import { FaSignOutAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
-import {
-  FaHome,
-  FaBook,
-  FaUserGraduate,
-  FaClipboardList,
-  FaMoneyBillAlt,
-  FaChalkboardTeacher,
-  FaBullhorn,
-  FaCalendarAlt,
-} from "react-icons/fa";
+import { FaHome, FaBook, FaUserGraduate, FaBullhorn } from "react-icons/fa";
 
 export default function UniSidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,7 +13,6 @@ export default function UniSidebar() {
     setIsOpen(!isOpen);
   };
   const handleLogout = () => {
-    // Display confirmation Swal
     Swal.fire({
       icon: "warning",
       title: "Logout",
@@ -41,9 +31,10 @@ export default function UniSidebar() {
   return (
     <div id="sidebar">
       <div className="pt-4 text-white">
-        
         <h2>DIGI</h2>
-        <h1><strong>CAMPUS</strong></h1>
+        <h1>
+          <strong>CAMPUS</strong>
+        </h1>
       </div>
 
       <ul className="list-unstyled components">
@@ -62,58 +53,12 @@ export default function UniSidebar() {
           <Link to="/active-college">
             <FaUserGraduate /> Active Colleges
           </Link>
-          {/* <ul className="collapse list-unstyled" id="studentsSubmenu">
-            <li>
-              <Link to="#">
-                <FaUserGraduate /> View Students
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                <FaUserGraduate /> Add Student
-              </Link>
-            </li>
-            <li>
-              <Link to="#">
-                <FaUserGraduate /> Student Attendance
-              </Link>
-            </li>
-          </ul> */}
         </li>
-        {/* <li onClick={toggleAccordion}>
-          <Link to="#">
-            <FaClipboardList /> Exams
-          </Link>
-          {isOpen && (
-            <ul className="nested">
-              <li>
-                <Link to="/#" style={{ color: "black" }}>
-                  Add exam
-                </Link>
-              </li> */}
-              {/* <li>
-              <Link to="/publish-distribute" style={{ color: 'black' }}>Publish</Link>
-            </li> */}
-              {/* <li>
-                <Link to="/#" style={{ color: "black" }}>
-                  View result
-                </Link>
-              </li>
-            </ul>
-          )}
-        </li> */}
-        
-        {/* <li>
-          <Link to="/#">
-            <FaChalkboardTeacher /> Faculty
-          </Link>
-        </li> */}
         <li>
           <Link to="/university-notice">
             <FaBullhorn /> Notice Board
           </Link>
         </li>
-        
       </ul>
 
       <Link

@@ -9,8 +9,6 @@ import Swal from "sweetalert2";
 const CollegeLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [universityId, setUniversityId] = useState("");
-  const [collegeId, setCollegeId] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -23,17 +21,13 @@ const CollegeLogin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://54.68.156.170:8000/college_login/",
+        "http://54.68.156.170:8000/employee_login/",
         {
-          college_email: email,
+          email: email,
           password: password,
         }
       );
-      const universityId = response.data.data.university_id;
-      const collegeId = response.data.data.college_id;
 
-      setUniversityId(universityId);
-      setCollegeId(collegeId);
       Swal.fire({
         title: "Login Successful",
         text: "You are now logged in",
@@ -42,9 +36,11 @@ const CollegeLogin = () => {
       });
       localStorage.setItem("collegeId", response.data.data.college_id);
       localStorage.setItem("universityId", response.data.data.university_id);
+      localStorage.setItem("teacherId", response.data.data.teacher_id);
+      localStorage.setItem("roleName", response.data.role_name);
 
 
-      navigate(`/Home`);
+      navigate("/staff-portal");
     } catch (error) {
       setError("Invalid email or password. Please try again.");
     }
@@ -54,7 +50,7 @@ const CollegeLogin = () => {
     <div className="auth-wrapper">
       <div className="auth-inner admin-login-inner">
         <form onSubmit={handleLogin}>
-          <h3>College Login</h3>
+          <h3>Employee Login</h3>
           <div className="mb-3">
             <label>Email address</label>
             <input
@@ -98,8 +94,10 @@ const CollegeLogin = () => {
             </a>
           </p>
 
-          <div className="" style={{ textAlign: "center", fontSize:"13px", }}>
-            <Link to="/employee-Login" style={{textDecoration:"none"}}>Employee Login</Link>
+          <div className="" style={{ textAlign: "center", fontSize: "13px" }}>
+            <Link to="/collegeLogin" style={{ textDecoration: "none" }}>
+              College Admin
+            </Link>
           </div>
         </form>
       </div>

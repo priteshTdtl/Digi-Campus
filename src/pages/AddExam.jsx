@@ -136,27 +136,33 @@ export default function AddExam() {
                     />
                   </Form.Group>
                 </Col>
+
                 <Col>
-                  <Form.Group controlId="time">
-                    <Form.Label>Time:</Form.Label>
-                    <div className="d-flex">
-                      <Form.Control
+                  <div className="row">
+                    <div className="col-12">
+                      <label htmlFor="">Time</label>
+                    </div>
+                    <div className="col-6">
+                      <input
                         type="time"
                         name="time"
+                        className="form-control"
                         value={examData.time}
                         onChange={handleInputChange}
                       />
-                      <Form.Select
-                        className="ms-2"
+                    </div>
+                    <div className="col-6">
+                      <select
+                        className="form-control"
                         name="ampm"
                         value={examData.ampm}
                         onChange={handleInputChange}
                       >
                         <option value="AM">AM</option>
                         <option value="PM">PM</option>
-                      </Form.Select>
+                      </select>
                     </div>
-                  </Form.Group>
+                  </div>
                 </Col>
               </Row>
               <Form.Group className="mb-3" controlId="marks">
@@ -168,40 +174,61 @@ export default function AddExam() {
                   onChange={handleInputChange}
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="rules">
-                <Form.Label>Rules / Description:</Form.Label>
-                <ReactQuill
-                  theme="snow"
-                  value={examData.rules}
-                  onChange={(value) =>
-                    setExamData({ ...examData, rules: value })
-                  }
-                />
-              </Form.Group>
-              <Form.Group className="mb-3 " controlId="duration">
-                <Form.Label>Duration (in minutes):</Form.Label>
-                <Form.Control
-                  type="number"
-                  name="duration"
-                  value={examData.duration}
-                  onChange={handleInputChange}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="branch">
-                <Form.Label>Branch:</Form.Label>
-                <Form.Select
-                  name="branch_id"
-                  value={examData.branch_id}
-                  onChange={handleInputChange}
-                >
-                  <option value="">Select Branch</option>
-                  {branchList.map((branch) => (
-                    <option key={branch.branch_id} value={branch.branch_id}>
-                      {branch.branch_name}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
+
+              <div className="row">
+                <div className="col-12">
+                  <label htmlFor=""> Rules / Description:</label>
+                </div>
+                <div className="col-12">
+                  <ReactQuill
+                    theme="snow"
+                    value={examData.rules}
+                    onChange={(value) =>
+                      setExamData({ ...examData, rules: value })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="row" style={{ marginTop: "5rem" }}>
+                <div className="col-12 ">
+                  <label htmlFor="" className="form-label">
+                    Duration (in minutes):
+                  </label>
+                </div>
+                <div className="col-12">
+                  <input
+                    type="text"
+                    name="duration"
+                    className="form-control"
+                    value={examData.duration}
+                    onChange={handleInputChange}
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col-12">
+                  <label htmlFor="">Branch:</label>
+                </div>
+                <div className="col-12">
+                  <select
+                    id=""
+                    name="branch_id"
+                    className="form-control"
+                    value={examData.branch_id}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Select Branch</option>
+                    {branchList.map((branch) => (
+                      <option key={branch.branch_id} value={branch.branch_id}>
+                        {branch.branch_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
               <Button
                 variant="success"
                 onClick={handleAddExamClick}

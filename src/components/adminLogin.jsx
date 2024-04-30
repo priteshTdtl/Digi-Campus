@@ -31,7 +31,7 @@ const AdminLogin = () => {
               className="form-control"
               placeholder="Enter password"
             />
-            
+            {/* Toggle button to show/hide password */}
             <button
               type="button"
               className="toggle-password"
@@ -78,4 +78,3 @@ const AdminLogin = () => {
 };
 
 export default AdminLogin;
-

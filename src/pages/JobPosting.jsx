@@ -3,6 +3,8 @@ import "../style/Notice.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import Sidebar from "../components/sidebar";
+import EmpSidebar from "../components/EmpSidebar";
+import Swal from "sweetalert2";
 function JobPosting() {
   const [formData, setFormData] = useState({
     company_name: "",
@@ -41,7 +43,11 @@ function JobPosting() {
         body: JSON.stringify(formData)
       });
       if (response.ok) {
-        alert("Job posted successfully!");
+       Swal.fire ({
+         title: "Job Posted Successfully",
+         icon: "success",
+         confirmButtonText: "OK"
+       })
         setFormData({
           company_name: "",
           date: "",
@@ -55,18 +61,23 @@ function JobPosting() {
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to post job. Please check your network connection.");
+      Swal.fire ({
+        title: "Error",
+        text:   error.message,
+        icon: "error",
+        confirmButtonText: "OK"
+      })
     }
   };
 
 
   return (
     <>
-      <Sidebar />
+      <EmpSidebar />
       <div className="container-fluid dashboard-area d-flex">
         <div className="main-content p-4">
           <div className="dash-root d-flex justify-content-center p-5 ">
-            <div className="card-notice">
+            <div className="card-notice py-3" style={{height:"100vh"}}>
               <div className="m-4 headingnotice d-flex justify-content-center">
                 <h2>Job Posting</h2>
               </div>
@@ -156,14 +167,14 @@ function JobPosting() {
                             <b>Job Description:</b>
                           </label>
                         </div>
-                        <div className="col-12">
+                        <div className="col-12" >
                           <ReactQuill
                             id="description"
-                            className="body-box"
+                            // className="body-box"
                             placeholder="Enter job description"
                             value={formData.description}
                             onChange={handleDescriptionChange}
-                            style={{height:"17em"}}
+                     
                           />
                         </div>
                       </div>
@@ -171,7 +182,7 @@ function JobPosting() {
                   </form>
                   </div>
                 </div>
-              <div className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center pt-4">
                       <button className="p-2 m-2 bg-primary btn-submit" onClick={handleSubmit}> Post Job </button>
               </div>
             </div>

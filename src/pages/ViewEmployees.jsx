@@ -54,12 +54,12 @@ const EmployeeViewsForm = () => {
       selector: (row) => row.phone_number,
     },
     {
-      name: "Address",
-      selector: (row) => row.address,
-    },
-    {
       name: "Gender",
       selector: (row) => row.gender,
+    },
+    {
+      name: "Address",
+      selector: (row) => row.address,
     },
     {
       name: "Department",
@@ -74,7 +74,7 @@ const EmployeeViewsForm = () => {
     //   selector: (row) => row.emergency_contact_name,
     // },
     {
-      name: "Emergency Contact Number",
+      name: "E Contact No",
       selector: (row) => row.emergency_contact_number,
     },
   ];
